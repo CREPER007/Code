@@ -1,0 +1,67 @@
+#include <stdio.h>
+
+#define MAX 20
+
+int adj[MAX][MAX], visited[MAX], queue[MAX];
+int front = -1, rear = -1;
+
+// Queue operations
+void enqueue(int v) {
+    if (rear == MAX - 1) return;
+    if (front == -1) front = 0;
+    queue[++rear] = v;
+}
+
+int dequeue() {
+    if (front == -1 || front > rear) return -1;
+    return queue[front++];
+}
+
+// BFS function
+void bfs(int start, int n) {
+    int i;
+    enqueue(start);
+    visited[start] = 1;
+
+    while (front <= rear) {
+        int v = dequeue();
+        printf("%d ", v);
+
+        for (i = 0; i < n; i++) {
+            if (adj[v][i] == 1 && !visited[i]) {
+                enqueue(i);
+                visited[i] = 1;
+            }
+        }
+    }
+}
+
+// Main
+int main() {
+    int n, e, i, j, u, v, start;
+
+    printf("Enter number of vertices: ");
+    scanf("%d", &n);
+
+    // Initialize matrix
+    for (i = 0; i < n; i++)
+        for (j = 0; j < n; j++)
+            adj[i][j] = 0;
+
+    printf("Enter number of edges: ");
+    scanf("%d", &e);
+
+    printf("Enter edges (u v):\n");
+    for (i = 0; i < e; i++) {
+        scanf("%d %d", &u, &v);
+        adj[u][v] = 1;
+        adj[v][u] = 1; // for undirected graph
+    }
+
+    printf("Enter starting vertex: ");
+    scanf("%d", &start);
+
+    bfs(start, n);
+
+    return 0;
+}
