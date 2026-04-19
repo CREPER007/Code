@@ -1,0 +1,76 @@
+#include <stdio.h>
+#include <stdlib.h>
+struct node {
+int data;
+struct node *left, *right;
+};
+struct node* insert(struct node* root, int x) {
+if (root == NULL) {
+struct node* newnode = (struct node*)malloc(sizeof(struct node));
+newnode->data = x;
+newnode->left = newnode->right = NULL;
+return newnode;
+}
+if (x < root->data)
+root->left = insert(root->left, x);
+else if (x > root->data)
+root->right = insert(root->right, x);
+return root;
+}
+void inorder(struct node* r) {
+if (r != NULL) {
+inorder(r->left);
+printf("%d ", r->data);
+inorder(r->right);
+}
+}
+void preorder(struct node* r) {
+if (r != NULL) {
+printf("%d ", r->data);
+preorder(r->left);
+preorder(r->right);
+}
+}
+void postorder(struct node* r) {
+if (r != NULL) {
+postorder(r->left);
+postorder(r->right);
+printf("%d ", r->data);
+}
+}
+int main() {
+struct node* root = NULL;
+int ch, x, n;
+do {
+printf("\n1.Insert Multiple Values\n2.Inorder\n3.Preorder\n4.Postorder\n5.Exit\n");
+printf("Enter choice: ");
+scanf("%d", &ch);
+switch (ch) {
+case 1:
+printf("How many values you want to insert: ");
+scanf("%d", &n);
+for (int i = 0; i < n; i++) {
+printf("Enter value %d: ", i + 1);
+scanf("%d", &x);
+root = insert(root, x);
+}
+break;
+case 2:
+printf("Inorder: ");
+inorder(root);
+break;
+case 3:
+printf("Preorder: ");
+preorder(root);
+break;
+case 4:
+printf("Postorder: ");
+postorder(root);
+break;
+case 5:
+printf("Exiting...\n");
+break;
+}
+} while (ch != 5);
+return 0;
+}
