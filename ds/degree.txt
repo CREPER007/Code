@@ -30,7 +30,7 @@ printf("\n");
 
 printf("\nVertex\tIndegree\toutdegree\tTotal\n");
 
-for(i=1; i <= n; i++)
+for(i=1; i <= n; i++){
 
 for(j = 1; j <= n; j++) { in = 0; out = 0; in += a[j][i]; out += a[i][j];
 
