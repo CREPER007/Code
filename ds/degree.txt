@@ -1,0 +1,41 @@
+#include <stdio.h>
+
+int main() {
+
+int n, a[10][10], i, j, in, out;
+
+printf("Enter total number of vertices: ");
+
+scanf("%d", &n);
+
+for(i = 1; i <= n; i++) {
+
+for(j = 1; j <= n; j++) {
+
+printf("Enter edge between v%d and v%d: ", i, j); scanf("%d", &a[i][j]);
+
+}
+
+}
+
+printf("\nAdjacency matrix is:\n");
+
+for(i=1; i <= n; i++) {
+
+for(j = 1; j <= n; j++) { printf("%d", a[i][j]); }
+
+printf("\n");
+
+}
+
+printf("\nVertex\tIndegree\toutdegree\tTotal\n");
+
+for(i=1; i <= n; i++)
+
+for(j = 1; j <= n; j++) { in = 0; out = 0; in += a[j][i]; out += a[i][j];
+
+}
+
+printf("%d\t%d\t\t%d\t\t%d\n", i, in, out, in + out);
+}
+}
